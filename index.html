@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Lab Kelas IX - Variabel + print()</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--line:#dbe3ef;--text:#1f2937;--muted:#64748b;--blue:#2563eb;--blue2:#1d4ed8;--green:#15803d;--red:#b91c1c;--yellow:#f59e0b;--soft:#eff6ff;--code:#0f172a;--ink:#e5e7eb}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;padding:20px 18px}
+.header-inner{max-width:1280px;margin:auto;display:flex;gap:14px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+header h1{margin:0 0 5px;font-size:30px}header p{margin:0;opacity:.95}.badge{background:rgba(255,255,255,.16);padding:9px 14px;border-radius:999px;font-weight:bold;font-size:13px}
+main{max-width:1280px;margin:auto;padding:18px}
+.topbar,.sidebar,.workspace,.modal-card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 4px 16px rgba(15,23,42,.05)}
+.topbar{padding:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:16px}
+.field{display:flex;flex-direction:column;gap:6px;flex:1 1 250px}.field label{font-size:12px;font-weight:bold;color:#475569}
+input{border:1px solid #cbd5e1;border-radius:9px;padding:10px 11px;font-size:14px;width:100%}input[readonly]{background:#e5e7eb;color:#475569;font-weight:bold;cursor:not-allowed}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:bold;cursor:pointer;font-size:13px}button:disabled{opacity:.55;cursor:not-allowed}
+.primary{background:var(--blue);color:white}.primary:hover{background:var(--blue2)}.soft{background:#e0e7ff;color:#1e3a8a}.good{background:#dcfce7;color:#166534}.warn{background:#fef3c7;color:#92400e}.danger{background:#fee2e2;color:#991b1b}
+.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}.sidebar{padding:12px;position:sticky;top:12px}.sidebar h2{font-size:16px;margin:4px 4px 10px}
+.progress-wrap{margin:0 4px 12px}.progress-text{font-size:12px;color:var(--muted);margin-bottom:5px}.progress-line{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progress-bar{height:100%;background:var(--blue);width:0%;transition:.2s}
+.challenge-btn{width:100%;text-align:left;margin:4px 0;background:#f8fafc;color:#334155;border:1px solid #e2e8f0;display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px}
+.challenge-btn.active{background:#dbeafe;border-color:#93c5fd;color:#1e3a8a}.challenge-btn.locked{background:#f1f5f9;color:#94a3b8;cursor:not-allowed}.challenge-btn.correct{background:#ecfdf5;border-color:#86efac;color:#166534}
+.state{font-weight:bold}.workspace{overflow:hidden}.challenge-head{background:var(--soft);padding:16px;border-bottom:1px solid var(--line)}.challenge-head h2{margin:0 0 6px;color:#1e3a8a;font-size:22px}.challenge-head p{margin:0;color:#475569}
+.example{margin-top:12px;padding:11px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:9px;white-space:pre-wrap;font-family:Consolas,"Courier New",monospace;font-size:13px;user-select:none;cursor:default}
+.editor-wrap{padding:14px}.editor-toolbar{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.editor-title{font-weight:bold}
+.status{font-size:12px;color:var(--muted)}.status.ok{color:var(--green);font-weight:bold}
+textarea{width:100%;min-height:350px;resize:vertical;border:1px solid #334155;border-radius:10px;background:var(--code);color:var(--ink);padding:14px;font-family:Consolas,"Courier New",monospace;font-size:15px;line-height:1.55;outline:none;tab-size:4}
+textarea:focus{box-shadow:0 0 0 3px rgba(37,99,235,.15)}.run-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.run-btn{background:#16a34a;color:#fff;font-size:14px;padding:10px 18px}.run-btn:hover{background:#15803d}
+.feedback{margin-top:10px;border-radius:10px;padding:11px 12px;font-size:13px;font-weight:bold;display:none}.feedback.correct{display:block;background:#dcfce7;border:1px solid #86efac;color:#166534}.feedback.wrong{display:block;background:#fee2e2;border:1px solid #fca5a5;color:#991b1b}
+.output-box{margin-top:12px}.output-title{font-size:13px;font-weight:bold;margin-bottom:6px}
+pre{margin:0;min-height:130px;max-height:280px;overflow:auto;background:#020617;color:#e2e8f0;border-radius:10px;padding:12px;font-family:Consolas,"Courier New",monospace;font-size:14px;white-space:pre-wrap}
+.notice{margin-top:14px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:11px;font-size:13px;color:#713f12}.small{font-size:12px;color:var(--muted)}
+.help-fab{position:fixed;right:18px;bottom:18px;z-index:30;background:#1d4ed8;color:white;padding:13px 16px;border-radius:999px;box-shadow:0 10px 25px rgba(29,78,216,.25);font-weight:bold}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:18px;z-index:40}.modal.show{display:flex}
+.modal-card{max-width:920px;width:100%;max-height:90vh;overflow:auto}.modal-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center;position:sticky;top:0;background:#fff}.modal-head h3{margin:0;color:#1e3a8a}
+.modal-body{padding:18px}.m-section{margin-bottom:18px}.m-section h4{margin:0 0 8px;color:#1f2937}.m-code{white-space:pre-wrap;background:#0f172a;color:#e5e7eb;padding:12px;border-radius:10px;font-family:Consolas,"Courier New",monospace;font-size:14px;user-select:none}.close-btn{background:#fee2e2;color:#991b1b}
+.grid-help{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
+@media(max-width:920px){.layout{grid-template-columns:1fr}.sidebar{position:static}}@media(max-width:680px){.grid-help{grid-template-columns:1fr}header h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="header-inner"><div><h1>Python Lab Kelas IX</h1><p>Pertemuan 2 • Materi <b>Variabel + print()</b> • Media latihan offline di browser</p></div><div class="badge">Mode Offline Siap ✓</div></div></header>
+<main>
+<section class="topbar">
+<div class="field"><label>Nama file saat ini</label><input id="filename" value="jawaban_python_variabel_print"></div>
+<div class="field"><label>Nama File Pertama (tidak dapat diedit)</label><input id="originalFilename" value="Belum ada file yang di-import" readonly tabindex="-1"></div>
+<div class="actions">
+<button class="soft" id="importBtn">Import File (.py)</button>
+<input id="importFile" type="file" accept=".py,text/plain,text/x-python" style="display:none">
+<button class="primary" id="saveBtn">Simpan Semua (.py)</button>
+<button class="danger" id="resetBtn">Kosongkan Semua</button>
+</div></section>
+<div class="layout">
+<aside class="sidebar"><h2>Daftar Tantangan</h2><div class="progress-wrap"><div class="progress-text" id="progressText">0 dari 15 benar • 0 terisi</div><div class="progress-line"><div class="progress-bar" id="progressBar"></div></div></div><div id="challengeList"></div></aside>
+<section class="workspace">
+<div class="challenge-head"><h2 id="challengeTitle"></h2><p id="challengePrompt"></p><div class="example" id="challengeExample" oncopy="return false" oncut="return false" oncontextmenu="return false" ondragstart="return false" title="Contoh ini hanya untuk dilihat. Ketik kode sendiri."></div></div>
+<div class="editor-wrap">
+<div class="editor-toolbar"><div class="editor-title">Code Editor Python</div><div class="status" id="saveStatus">Belum diisi</div></div>
+<textarea id="editor" spellcheck="false" placeholder='Ketik kode Python di sini...
+Contoh:
+bahasa = "Python"
+print(bahasa)'></textarea>
+<div class="run-row"><button class="run-btn" id="runBtn">▶ Run Python</button><button class="warn" id="clearOutput">Bersihkan Output</button><span class="small">Ctrl + Enter untuk menjalankan kode</span></div>
+<div id="feedback" class="feedback"></div>
+<div class="output-box"><div class="output-title">Output Program</div><pre id="output">Tekan Run Python untuk melihat hasil.</pre></div>
+<div class="notice"><b>Catatan:</b> Media ini dibuat khusus untuk materi <b>variabel + print()</b>, sehingga berjalan <b>offline</b> tanpa menunggu Python dari internet. Yang diperiksa adalah penulisan variabel, penggunaan <b>print()</b>, dan hasil outputnya.</div>
+</div></section></div></main>
+<button class="help-fab" id="openHelp">❓ Bantuan Variabel + print()</button>
+<div class="modal" id="helpModal"><div class="modal-card"><div class="modal-head"><h3>Bantuan Materi: Variabel + print()</h3><button class="close-btn" id="closeHelp">Tutup</button></div><div class="modal-body">
+<div class="grid-help">
+<div class="m-section"><h4>1. Apa itu variabel?</h4><p>Variabel adalah tempat untuk menyimpan data di dalam program.</p><div class="m-code">nama = "Python"
+print(nama)</div></div>
+<div class="m-section"><h4>2. Apa fungsi print()?</h4><p><b>print()</b> digunakan untuk menampilkan sesuatu ke layar.</p><div class="m-code">print("Halo")
+print("Saya belajar Python")</div></div>
+<div class="m-section"><h4>3. Teks dan angka</h4><p>Teks memakai tanda kutip. Angka tidak perlu tanda kutip.</p><div class="m-code">bahasa = "Python"
+pertemuan = 2
+print(bahasa)
+print(pertemuan)</div></div>
+<div class="m-section"><h4>4. Variabel bisa diubah</h4><div class="m-code">status = "Belum Selesai"
+print(status)
+
+status = "Selesai"
+print(status)</div></div>
+</div>
+<div class="m-section"><h4>5. Langkah mengerjakan tantangan</h4><ol><li>Baca instruksi tantangan.</li><li>Perhatikan target output.</li><li>Ketik kodenya sendiri di editor.</li><li>Tekan <b>Run Python</b>.</li><li>Jika output benar, tantangan berikutnya terbuka.</li></ol></div>
+<div class="m-section"><h4>6. Kesalahan umum</h4><ul><li>Menulis <b>Print()</b> padahal harus <b>print()</b>.</li><li>Lupa tanda kutip pada teks.</li><li>Menampilkan variabel yang belum dibuat.</li><li>Salah menulis nama variabel.</li></ul></div>
+</div></div></div>
+<footer>Media Praktik Informatika Kelas IX • Variabel + print()</footer>
+
+<script>
+const challenges=[
+{title:"Tantangan 1 — Variabel Pertama",prompt:"Buat variabel bahasa berisi 'Python', lalu tampilkan dengan print().",example:"Target output:\nPython"},
+{title:"Tantangan 2 — Pelajaran",prompt:"Buat variabel pelajaran berisi 'Informatika', lalu tampilkan.",example:"Target output:\nInformatika"},
+{title:"Tantangan 3 — Dua Variabel",prompt:"Gunakan variabel bahasa = 'Python' dan kelas = 'IX', lalu tampilkan keduanya.",example:"Target output:\nPython\nIX"},
+{title:"Tantangan 4 — Tiga Data",prompt:"Gunakan variabel pelajaran, materi, dan kelas. Tampilkan semuanya.",example:"Target output:\nInformatika\nVariabel\nIX"},
+{title:"Tantangan 5 — Variabel Angka",prompt:"Gunakan variabel tahun = 2026, lalu tampilkan.",example:"Target output:\n2026"},
+{title:"Tantangan 6 — Teks dan Angka",prompt:"Gunakan bahasa = 'Python' dan pertemuan = 2, lalu tampilkan.",example:"Target output:\nPython\n2"},
+{title:"Tantangan 7 — Judul Program",prompt:"Gunakan variabel judul = 'BELAJAR PYTHON' dan materi = 'VARIABEL'.",example:"Target output:\n====================\nBELAJAR PYTHON\nVARIABEL\n===================="},
+{title:"Tantangan 8 — Informasi Teknologi",prompt:"Buat variabel perangkat, sistem, dan bahasa lalu tampilkan dalam format yang sesuai.",example:"Target output:\nPERANGKAT TEKNOLOGI\n--------------------\nKomputer\nWindows\nPython\n--------------------"},
+{title:"Tantangan 9 — Data Game",prompt:"Gunakan nama_game, jenis, dan tahun untuk menampilkan data game.",example:"Target output:\n====================\nDATA GAME\n====================\nMinecraft\nSandbox\n2011\n===================="},
+{title:"Tantangan 10 — Label dan Variabel",prompt:"Gabungkan teks langsung dan data dari variabel.",example:"Target output:\nNama Barang:\nKeyboard\nJenis:\nPerangkat Input\nJumlah:\n25"},
+{title:"Tantangan 11 — Data Komputer",prompt:"Gunakan cpu, ram, dan penyimpanan untuk membuat tampilan spesifikasi komputer.",example:"Target output:\n========================\nSPESIFIKASI KOMPUTER\n========================\nCPU\nIntel Core i5\nRAM\n8 GB\nPenyimpanan\n512 GB\n========================"},
+{title:"Tantangan 12 — Mengubah Isi Variabel",prompt:"Tampilkan status sebelum dan sesudah diubah.",example:"Target output:\nBelum Selesai\nSelesai"},
+{title:"Tantangan 13 — Variabel Dipakai Berulang",prompt:"Gunakan satu variabel kata = 'Python' lalu tampilkan 5 kali.",example:"Target output:\nPython\nPython\nPython\nPython\nPython"},
+{title:"Tantangan 14 — Kartu Teknologi",prompt:"Buat judul dan 3 data teknologi lalu tampilkan dengan bingkai.",example:"Target output:\n################################\n      TEKNOLOGI MASA DEPAN\n################################\nRobot\nArtificial Intelligence\nInternet\n################################"},
+{title:"Tantangan 15 — Karya Variabel Bebas",prompt:"Buat program sendiri dengan minimal 5 variabel, minimal 10 print(), minimal 1 variabel angka, minimal 4 variabel teks.",example:"Tema bebas. Buat judul, isi, dan tampilan bingkai sederhana."}
+];
+const expectedOutputs=[
+`Python`,`Informatika`,`Python
+IX`,`Informatika
+Variabel
+IX`,`2026`,`Python
+2`,`====================
+BELAJAR PYTHON
+VARIABEL
+====================`,`PERANGKAT TEKNOLOGI
+--------------------
+Komputer
+Windows
+Python
+--------------------`,`====================
+DATA GAME
+====================
+Minecraft
+Sandbox
+2011
+====================`,`Nama Barang:
+Keyboard
+Jenis:
+Perangkat Input
+Jumlah:
+25`,`========================
+SPESIFIKASI KOMPUTER
+========================
+CPU
+Intel Core i5
+RAM
+8 GB
+Penyimpanan
+512 GB
+========================`,`Belum Selesai
+Selesai`,`Python
+Python
+Python
+Python
+Python`,`################################
+      TEKNOLOGI MASA DEPAN
+################################
+Robot
+Artificial Intelligence
+Internet
+################################`,null
+];
+let current=0,originalFilename=localStorage.getItem("p2_original_filename")||"";
+const answers=challenges.map((_,i)=>localStorage.getItem("p2_answer_"+i)||"");
+let completed=challenges.map((_,i)=>localStorage.getItem("p2_correct_"+i)==="1");
+const editor=document.getElementById("editor"),output=document.getElementById("output"),feedback=document.getElementById("feedback");
+function cleanName(s){return(s.trim().replace(/[\\/:*?"<>|]+/g,"_").replace(/\s+/g,"_")||"jawaban_python_variabel_print")}
+function normalizeOutput(s){return String(s??"").replace(/\r\n/g,"\n").split("\n").map(x=>x.replace(/\s+$/g,"")).join("\n").replace(/^\n+|\n+$/g,"")}
+function refreshOriginal(){document.getElementById("originalFilename").value=originalFilename||"Belum ada file yang di-import"}
+function updateSaveStatus(){const filled=editor.value.trim().length>0,s=document.getElementById("saveStatus");s.textContent=filled?"Tersimpan otomatis":"Belum diisi";s.className=filled?"status ok":"status"}
+function updateSidebarState(){document.querySelectorAll(".challenge-btn").forEach((b,i)=>{const unlocked=i===0||completed[i-1];b.disabled=!unlocked;b.classList.toggle("locked",!unlocked);b.classList.toggle("correct",completed[i]);b.classList.toggle("active",i===current);b.querySelector(".state").textContent=completed[i]?"✓":(!unlocked?"🔒":"○")})}
+function updateProgress(){let filled=0,correct=0;answers.forEach((a,i)=>{if(a.trim())filled++;if(completed[i])correct++});document.getElementById("progressText").textContent=`${correct} dari 15 benar • ${filled} terisi`;document.getElementById("progressBar").style.width=`${(correct/15)*100}%`;updateSidebarState()}
+function setChallenge(i){if(i>0&&!completed[i-1])return;current=i;document.getElementById("challengeTitle").textContent=challenges[i].title;document.getElementById("challengePrompt").textContent=challenges[i].prompt;document.getElementById("challengeExample").textContent=challenges[i].example;editor.value=answers[i];output.textContent="Tekan Run Python untuk melihat hasil.";feedback.className="feedback";feedback.textContent="";updateSaveStatus();updateSidebarState()}
+function buildSidebar(){const wrap=document.getElementById("challengeList");challenges.forEach((c,i)=>{const b=document.createElement("button");b.className="challenge-btn";b.innerHTML=`<span>Tantangan ${i+1}</span><span class="state">○</span>`;b.onclick=()=>setChallenge(i);wrap.appendChild(b)});updateSidebarState()}
+editor.addEventListener("input",()=>{answers[current]=editor.value;localStorage.setItem("p2_answer_"+current,editor.value);updateSaveStatus();updateProgress()});
+editor.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const s=editor.selectionStart,en=editor.selectionEnd;editor.value=editor.value.substring(0,s)+"    "+editor.value.substring(en);editor.selectionStart=editor.selectionEnd=s+4;editor.dispatchEvent(new Event("input"))}if(e.ctrlKey&&e.key==="Enter"){e.preventDefault();runCode()}});
+function parseValue(raw,vars){const t=raw.trim();if((t.startsWith('"')&&t.endsWith('"'))||(t.startsWith("'")&&t.endsWith("'")))return{ok:true,value:t.slice(1,-1)};if(/^-?\d+(\.\d+)?$/.test(t))return{ok:true,value:Number(t)};if(/^[A-Za-z_]\w*$/.test(t)){if(Object.prototype.hasOwnProperty.call(vars,t))return{ok:true,value:vars[t],variable:t};return{ok:false,error:`Variabel '${t}' belum dibuat.`}}return{ok:false,error:`Nilai atau isi print() tidak dikenali: ${t}`}}
+function interpretPythonSubset(code){const lines=code.replace(/\r\n/g,"\n").split("\n"),vars={},assignedInfo=[],printedVars=[],out=[];for(let i=0;i<lines.length;i++){const line=lines[i].trim();if(!line||line.startsWith("#"))continue;const assign=line.match(/^([A-Za-z_]\w*)\s*=\s*(.+)$/);if(assign){const name=assign[1],parsed=parseValue(assign[2],vars);if(!parsed.ok)return{ok:false,error:`Baris ${i+1}: ${parsed.error}`};vars[name]=parsed.value;assignedInfo.push({name,value:parsed.value,type:typeof parsed.value});continue}const pr=line.match(/^print\s*\(\s*(.+?)\s*\)\s*$/);if(pr){const parsed=parseValue(pr[1],vars);if(!parsed.ok)return{ok:false,error:`Baris ${i+1}: ${parsed.error}`};out.push(String(parsed.value));if(parsed.variable)printedVars.push(parsed.variable);continue}if(/^Print\s*\(/.test(line))return{ok:false,error:`Baris ${i+1}: gunakan 'print' huruf kecil, bukan 'Print'.`};return{ok:false,error:`Baris ${i+1}: sintaks belum didukung. Gunakan assignment variabel dan print().`}}return{ok:true,output:out.join("\n"),vars,assignedInfo,printedVars,printCount:(code.match(/\bprint\s*\(/g)||[]).length}}
+function validateChallenge(index,run){const actual=normalizeOutput(run.output);if(index<14){const expected=normalizeOutput(expectedOutputs[index]);return actual===expected?{ok:true,msg:"Benar! Tantangan berikutnya sudah terbuka."}:{ok:false,msg:"Output belum sesuai. Periksa kembali isi variabel, urutan print(), jumlah baris, dan simbol."}}const uniqueAssigned=[];run.assignedInfo.forEach(v=>{if(!uniqueAssigned.find(x=>x.name===v.name))uniqueAssigned.push(v)});const textVars=uniqueAssigned.filter(v=>typeof v.value==="string").length,numVars=uniqueAssigned.filter(v=>typeof v.value==="number").length,printedUnique=new Set(run.printedVars),allPrinted=uniqueAssigned.every(v=>printedUnique.has(v.name)),lines=actual?actual.split("\n").filter(x=>x.trim().length>0).length:0;const kurang=[];if(uniqueAssigned.length<5)kurang.push(`minimal 5 variabel (sekarang ${uniqueAssigned.length})`);if(run.printCount<10)kurang.push(`minimal 10 print() (sekarang ${run.printCount})`);if(numVars<1)kurang.push(`minimal 1 variabel angka (sekarang ${numVars})`);if(textVars<4)kurang.push(`minimal 4 variabel teks (sekarang ${textVars})`);if(lines<7)kurang.push(`minimal 7 baris output (sekarang ${lines})`);if(!allPrinted)kurang.push(`semua variabel harus ditampilkan dengan print()`);return kurang.length===0?{ok:true,msg:"Benar! Karya variabel bebas sudah memenuhi syarat."}:{ok:false,msg:"Belum memenuhi syarat: "+kurang.join(", ")+"."}}
+function markResult(index,result){if(result.ok){completed[index]=true;localStorage.setItem("p2_correct_"+index,"1");feedback.className="feedback correct";feedback.textContent="✓ "+result.msg}else{completed[index]=false;localStorage.removeItem("p2_correct_"+index);for(let j=index+1;j<completed.length;j++){completed[j]=false;localStorage.removeItem("p2_correct_"+j)}feedback.className="feedback wrong";feedback.textContent="✗ "+result.msg}updateProgress()}
+function runCode(){const code=editor.value;answers[current]=code;localStorage.setItem("p2_answer_"+current,code);if(!code.trim()){output.textContent="Editor masih kosong.";markResult(current,{ok:false,msg:"Editor masih kosong."});return}const run=interpretPythonSubset(code);if(!run.ok){output.textContent=run.error;markResult(current,{ok:false,msg:"Masih ada kesalahan pada kode. Perbaiki lalu coba lagi."});return}output.textContent=run.output||"Program selesai tanpa output.";markResult(current,validateChallenge(current,run))}
+document.getElementById("runBtn").onclick=runCode;document.getElementById("clearOutput").onclick=()=>{output.textContent="Output dibersihkan."};
+document.getElementById("filename").value=localStorage.getItem("p2_filename")||"jawaban_python_variabel_print";document.getElementById("filename").addEventListener("input",e=>localStorage.setItem("p2_filename",e.target.value));refreshOriginal();
+function makeAllContent(){const currentName=cleanName(document.getElementById("filename").value);if(!originalFilename){originalFilename=currentName;localStorage.setItem("p2_original_filename",originalFilename);refreshOriginal()}let out=`# PYTHON LAB KELAS IX - PERTEMUAN 2
+# ORIGINAL_FILENAME: ${originalFilename}
+# CURRENT_FILENAME: ${currentName}
+# COMPLETED: ${completed.map(x=>x?"1":"0").join("")}
+
+`;challenges.forEach((c,i)=>{out+=`# ==========================================
+# TANTANGAN ${i+1}
+# ${c.title}
+# ==========================================
+${answers[i].trim()||"# Belum diisi"}
+
+`});return out}
+function fallbackDownload(name,content){const blob=new Blob([content],{type:"text/x-python;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+async function saveAllToFile(){answers[current]=editor.value;localStorage.setItem("p2_answer_"+current,editor.value);const content=makeAllContent(),suggested=cleanName(document.getElementById("filename").value)+".py";if("showSaveFilePicker"in window){try{const handle=await window.showSaveFilePicker({suggestedName:suggested,startIn:"documents",types:[{description:"File Python",accept:{"text/x-python":[".py"],"text/plain":[".py"]}}]});const writable=await handle.createWritable();await writable.write(content);await writable.close();const nm=handle.name?handle.name.replace(/\.py$/i,""):cleanName(document.getElementById("filename").value);document.getElementById("filename").value=nm;localStorage.setItem("p2_filename",nm);alert("File berhasil disimpan.");return}catch(err){if(err&&err.name==="AbortError")return}}fallbackDownload(suggested,content)}
+document.getElementById("saveBtn").onclick=saveAllToFile;
+document.getElementById("importBtn").onclick=()=>document.getElementById("importFile").click();
+document.getElementById("importFile").addEventListener("change",e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const text=String(ev.target.result||"");const completedMatch=text.match(/^# COMPLETED:\s*([01]{15})$/m);if(completedMatch){completed=completedMatch[1].split("").map(x=>x==="1");completed.forEach((v,i)=>{if(v)localStorage.setItem("p2_correct_"+i,"1");else localStorage.removeItem("p2_correct_"+i)})}else{completed=challenges.map(()=>false);challenges.forEach((_,i)=>localStorage.removeItem("p2_correct_"+i))}const originalMatch=text.match(/^# ORIGINAL_FILENAME:\s*(.+)$/m);originalFilename=(originalMatch&&originalMatch[1].trim())?originalMatch[1].trim():file.name.replace(/\.py$/i,"");localStorage.setItem("p2_original_filename",originalFilename);refreshOriginal();for(let i=0;i<challenges.length;i++){const startToken="# TANTANGAN "+(i+1),nextToken="# TANTANGAN "+(i+2),start=text.indexOf(startToken);if(start<0)continue;let after=text.indexOf("\n",start);if(after<0)continue;after=text.indexOf("\n",after+1);if(after<0)continue;after=text.indexOf("\n",after+1);if(after<0)continue;after+=1;let end=text.length;if(i<challenges.length-1){const next=text.indexOf(nextToken,after);if(next>=0){const sep=text.lastIndexOf("# ==========================================",next);end=sep>=0?sep:next}}let code=text.slice(after,end).trim();if(code==="# Belum diisi")code="";answers[i]=code;localStorage.setItem("p2_answer_"+i,code)}const importedName=file.name.replace(/\.py$/i,"");document.getElementById("filename").value=importedName;localStorage.setItem("p2_filename",importedName);let resumeIndex=completed.findIndex(v=>!v);if(resumeIndex===-1)resumeIndex=14;if(resumeIndex>0&&!completed[resumeIndex-1])resumeIndex=0;setChallenge(resumeIndex);updateProgress();alert("Import berhasil. Jawaban dan progres sebelumnya sudah dimuat.");e.target.value=""};reader.readAsText(file,"UTF-8")});
+document.getElementById("resetBtn").onclick=()=>{if(!confirm("Kosongkan semua jawaban dan progres?"))return;challenges.forEach((_,i)=>{answers[i]="";completed[i]=false;localStorage.removeItem("p2_answer_"+i);localStorage.removeItem("p2_correct_"+i)});originalFilename="";localStorage.removeItem("p2_original_filename");document.getElementById("filename").value="jawaban_python_variabel_print";localStorage.setItem("p2_filename","jawaban_python_variabel_print");refreshOriginal();setChallenge(0);updateProgress()};
+document.getElementById("openHelp").onclick=()=>document.getElementById("helpModal").classList.add("show");
+document.getElementById("closeHelp").onclick=()=>document.getElementById("helpModal").classList.remove("show");
+document.getElementById("helpModal").addEventListener("click",e=>{if(e.target.id==="helpModal")e.currentTarget.classList.remove("show")});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("helpModal").classList.remove("show")});
+[document.getElementById("challengeExample"),...document.querySelectorAll(".m-code")].forEach(area=>{["copy","cut","contextmenu","dragstart","selectstart"].forEach(evt=>area.addEventListener(evt,ev=>ev.preventDefault()))});
+buildSidebar();setChallenge(0);updateProgress();
+</script>
+</body>
+</html>
